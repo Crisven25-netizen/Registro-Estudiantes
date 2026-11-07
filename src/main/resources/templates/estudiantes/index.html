@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}"
+      lang="es">
+<head>
+    <title>Inicio</title>
+</head>
+<body>
+<div layout:fragment="contenido">
+    <!-- p-5: mucho espacio interno | bg-white: fondo blanco -->
+    <!-- rounded-3: esquinas redondeadas | shadow-sm: sombra suave -->
+    <div class="p-5 bg-white rounded-3 shadow-sm">
+        <!-- display-5: título extra grande | fw-bold: negrita -->
+        <h1 class="display-5 fw-bold" th:text="${titulo}">Título provisional</h1>
+        <!-- lead: párrafo destacado, con letra un poco más grande -->
+        <p class="lead" th:text="${curso}">Curso provisional</p>
+        <!-- btn: botón | btn-primary: color azul principal | btn-lg: grande -->
+        <a class="btn btn-primary btn-lg" th:href="@{/estudiantes}">Ver estudiantes</a>
+    </div>
+</div>
+</body>
+</html>

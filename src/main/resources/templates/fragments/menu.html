@@ -1,0 +1,14 @@
+<nav class="navbar navbar-expand bg-dark" data-bs-theme="dark">
+      <!-- container: centra el contenido y deja márgenes a los lados -->
+      <div class="container">
+        <!-- navbar-brand: nombre del sitio, con letra más grande -->
+        <a class="navbar-brand" href="@{/}">Registro</a>
+        <!-- navbar-nav: grupo de enlaces | nav-link: cada enlace del menú -->
+        <div class="navbar-nav">
+          <a class="nav-link" th:href="@{/estudiantes}">Estudiantes</a>
+          <a class="nav-link" th:href="@{/estudiantes/nuevo}"
+            >Nuevo estudiante</a
+          >
+        </div>
+      </div>
+    </nav>

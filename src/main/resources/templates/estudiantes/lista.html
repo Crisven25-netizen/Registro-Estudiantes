@@ -1,0 +1,73 @@
+<!doctype html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/base}"
+  lang="es"
+>
+  <head>
+    <title>Estudiantes</title>
+  </head>
+  <body>
+    <div layout:fragment="contenido">
+      <!-- d-flex: pone los elementos en fila
+             justify-content-between: uno a la izquierda y otro a la derecha
+             align-items-center: centrados en vertical | mb-3: margen abajo -->
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <!-- h3: el h1 se ve del tamaño de un h3 | mb-0: sin margen abajo -->
+        <h1 class="h3 mb-0">Lista de estudiantes</h1>
+        <!-- btn-success: botón verde -->
+        <a class="btn btn-success" th:href="@{/estudiantes/nuevo}">+ Nuevo</a>
+      </div>
+
+      <!-- alert alert-info: caja de aviso de color celeste -->
+      <div class="alert alert-info" th:if="${estudiantes.isEmpty()}">
+        Todavía no hay estudiantes.
+      </div>
+
+      <!-- table: tabla con estilo de Bootstrap | table-striped: filas alternadas
+             table-hover: resalta la fila al pasar el mouse | shadow-sm: sombra -->
+      <table
+        class="table table-striped table-hover shadow-sm"
+        th:unless="${estudiantes.isEmpty()}"
+      >
+        <!-- table-dark: encabezado con fondo oscuro -->
+        <thead class="table-dark">
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Sección</th>
+            <th>Nota</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="e, info : ${estudiantes}">
+            <td th:text="${info.count}">1</td>
+            <td>
+              <!-- ink-primary: enlace azul | fw-semibold: semi negrita -->
+              <a
+                class="link-primary fw-semibold"
+                th:href="@{/estudiantes/{id}(id=${e.id})}"
+                th:text="${e.nombre}"
+                >Nombre</a
+              >
+            </td>
+            <td th:text="${e.seccion}">11-1</td>
+            <td th:text="${e.nota}">90</td>
+            <td>
+              <!-- badge: etiqueta pequeña | text-bg-success: verde
+                             text-bg-danger: rojo -->
+              <span class="badge text-bg-success" th:if="${e.aprobado}"
+                >Aprobado</span
+              >
+              <span class="badge text-bg-danger" th:unless="${e.aprobado}"
+                >Reprobado</span
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

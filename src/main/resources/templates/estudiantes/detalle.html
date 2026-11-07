@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}"
+      lang="es">
+<head>
+    <title>Detalle</title>
+</head>
+<body>
+    <div layout:fragment="contenido">
+        <!-- card: tarjeta con borde | shadow-sm: sombra suave
+             col-md-6: ocupa la mitad del ancho en pantallas medianas o grandes -->
+        <div class="card shadow-sm col-md-6"
+             th:if="${estudiante != null}" th:object="${estudiante}">
+            <!-- card-body: espacio interno de la tarjeta -->
+            <div class="card-body">
+                <!-- card-title: título de la tarjeta | h3: tamaño de un h3 -->
+                <h1 class="card-title h3" th:text="*{nombre}">Nombre</h1>
+                <!-- card-text: texto normal dentro de la tarjeta -->
+                <p class="card-text" th:text="|Sección: *{seccion}|">Sección</p>
+                <p class="card-text" th:text="|Nota: *{nota}|">Nota</p>
+                <!-- badge: etiqueta | fs-6: tamaño de letra 6 (normal)
+                     th:classappend agrega verde o rojo según la nota -->
+                <span class="badge fs-6"
+                      th:classappend="*{aprobado} ? 'text-bg-success' : 'text-bg-danger'"
+                      th:text="*{aprobado} ? '¡Aprobado!' : 'Debe reponer'">Estado</span>
+            </div>
+        </div>
+        <!-- alert-warning: aviso de color amarillo -->
+        <div class="alert alert-warning col-md-6" th:if="${estudiante == null}">
+            Ese estudiante no existe.
+        </div>
+ 
+        <!-- btn-outline-secondary: botón gris solo con borde | mt-3: margen arriba -->
+        <a class="btn btn-outline-secondary mt-3" th:href="@{/estudiantes}">← Volver a la lista</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}"
+      lang="es">
+<head>
+    <title>Nuevo estudiante</title>
+</head>
+<body>
+    <div layout:fragment="contenido">
+        <!-- h3: tamaño de un h3 | mb-3: margen abajo -->
+        <h1 class="h3 mb-3">Nuevo estudiante</h1>
+ 
+        <!-- card + card-body: el formulario va dentro de una tarjeta
+             col-md-6: la tarjeta ocupa la mitad del ancho en pantallas grandes -->
+        <div class="card shadow-sm col-md-6">
+            <div class="card-body">
+                <form th:action="@{/estudiantes}" th:object="${estudiante}" method="post">
+ 
+                    <!-- mb-3: separa cada campo del siguiente -->
+                    <div class="mb-3">
+                        <!-- form-label: etiqueta del campo -->
+                        <label class="form-label" for="nombre">Nombre</label>
+                        <!-- form-control: caja de texto que ocupa todo el ancho -->
+                        <input class="form-control" type="text" th:field="*{nombre}" required>
+                    </div>
+ 
+                    <div class="mb-3">
+                        <label class="form-label" for="seccion">Sección</label>
+                        <!-- form-select: lista desplegable con estilo de Bootstrap -->
+                        <select class="form-select" th:field="*{seccion}">
+                            <option th:each="s : ${secciones}" th:value="${s}" th:text="${s}">11-1</option>
+                        </select>
+                    </div>
+ 
+                    <div class="mb-3">
+                        <label class="form-label" for="nota">Nota</label>
+                        <input class="form-control" type="number" th:field="*{nota}" min="0" max="100">
+                    </div>
+ 
+                    <!-- btn-primary: botón azul principal -->
+                    <button class="btn btn-primary" type="submit">Guardar</button>
+                    <!-- btn-outline-secondary: botón gris con borde | ms-2: margen a la izquierda -->
+                    <a class="btn btn-outline-secondary ms-2" th:href="@{/estudiantes}">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
